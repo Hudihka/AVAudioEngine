@@ -102,7 +102,7 @@ class ViewController: UIViewController {
 		
 		let customFramme = CGRect(x: 20,
 															y: 495,
-															width: 374,
+															width: 376,
 															height: 20)
 		
 		let CV = CollectionTiks(frame: customFramme)
