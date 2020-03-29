@@ -14,6 +14,8 @@ class ViewController: UIViewController {
   @IBOutlet weak var volumeMeterHeight: NSLayoutConstraint!
   @IBOutlet weak var countUpLabel: UILabel!
   @IBOutlet weak var countDownLabel: UILabel!
+	
+	@IBOutlet weak var fatProgressBar: UIProgressView!
 
   // MARK: AVAudio properties
   var engine = AVAudioEngine()
@@ -78,6 +80,8 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 		
+		addCollection()
+		
 //		апдейт лейблов
     countUpLabel.text = formatted(time: 0)
     countDownLabel.text = formatted(time: audioLengthSeconds)
@@ -89,6 +93,22 @@ class ViewController: UIViewController {
 		updater?.add(to: .current, forMode: .defaultRunLoopMode)
 		updater?.isPaused = true
   }
+	
+	
+	private func addCollection(){
+		fatProgressBar.transform = fatProgressBar.transform.scaledBy(x: 1, y: 10)
+		
+		//сделано  только для айфона 8+
+		
+		let customFramme = CGRect(x: 20,
+															y: 495,
+															width: 374,
+															height: 20)
+		
+		let CV = CollectionTiks(frame: customFramme)
+		
+		self.view.addSubview(CV)
+	}
 
 
 }
@@ -131,6 +151,7 @@ extension ViewController {
 
 		// прогресс бар
 		progressBar.progress = Float(currentPosition) / Float(audioLengthSamples)
+		fatProgressBar.progress = Float(currentPosition) / Float(audioLengthSamples)
 		let time = Float(currentPosition) / audioSampleRate
 		
 //		формат лейблов

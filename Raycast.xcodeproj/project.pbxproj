@@ -14,6 +14,11 @@
 		3F600C761FA1DC620051FB21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F600C741FA1DC620051FB21 /* LaunchScreen.storyboard */; };
 		3FC245611FB7114A0042D145 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FC245601FB7114A0042D145 /* Main.storyboard */; };
 		52A337F62430D10F004D2806 /* ExtensionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A337F52430D10F004D2806 /* ExtensionVC.swift */; };
+		52A337FC2430D3CD004D2806 /* CollectionTiks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A337F92430D3CD004D2806 /* CollectionTiks.swift */; };
+		52A337FD2430D3CD004D2806 /* TickCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52A337FA2430D3CD004D2806 /* TickCell.xib */; };
+		52A337FE2430D3CD004D2806 /* TickCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A337FB2430D3CD004D2806 /* TickCell.swift */; };
+		52A338002430D3D4004D2806 /* Constats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A337FF2430D3D4004D2806 /* Constats.swift */; };
+		52A338022430D75B004D2806 /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A338012430D75B004D2806 /* UICollectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +31,11 @@
 		3F600C771FA1DC620051FB21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3FC245601FB7114A0042D145 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		52A337F52430D10F004D2806 /* ExtensionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionVC.swift; sourceTree = "<group>"; };
+		52A337F92430D3CD004D2806 /* CollectionTiks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionTiks.swift; sourceTree = "<group>"; };
+		52A337FA2430D3CD004D2806 /* TickCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TickCell.xib; sourceTree = "<group>"; };
+		52A337FB2430D3CD004D2806 /* TickCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TickCell.swift; sourceTree = "<group>"; };
+		52A337FF2430D3D4004D2806 /* Constats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constats.swift; sourceTree = "<group>"; };
+		52A338012430D75B004D2806 /* UICollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,8 +76,21 @@
 				3FC245601FB7114A0042D145 /* Main.storyboard */,
 				3F600C6D1FA1DC620051FB21 /* ViewController.swift */,
 				52A337F52430D10F004D2806 /* ExtensionVC.swift */,
+				52A337FF2430D3D4004D2806 /* Constats.swift */,
+				52A337F82430D3CD004D2806 /* CollectionTiks */,
 			);
 			path = Raycast;
+			sourceTree = "<group>";
+		};
+		52A337F82430D3CD004D2806 /* CollectionTiks */ = {
+			isa = PBXGroup;
+			children = (
+				52A338012430D75B004D2806 /* UICollectionView.swift */,
+				52A337F92430D3CD004D2806 /* CollectionTiks.swift */,
+				52A337FA2430D3CD004D2806 /* TickCell.xib */,
+				52A337FB2430D3CD004D2806 /* TickCell.swift */,
+			);
+			path = CollectionTiks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -133,6 +156,7 @@
 				3FC245611FB7114A0042D145 /* Main.storyboard in Resources */,
 				01D817C91FD49E6F00C0F342 /* Assets.xcassets in Resources */,
 				3F600C761FA1DC620051FB21 /* LaunchScreen.storyboard in Resources */,
+				52A337FD2430D3CD004D2806 /* TickCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,7 +169,11 @@
 			files = (
 				3F600C6E1FA1DC620051FB21 /* ViewController.swift in Sources */,
 				52A337F62430D10F004D2806 /* ExtensionVC.swift in Sources */,
+				52A338022430D75B004D2806 /* UICollectionView.swift in Sources */,
+				52A338002430D3D4004D2806 /* Constats.swift in Sources */,
+				52A337FC2430D3CD004D2806 /* CollectionTiks.swift in Sources */,
 				3F600C6C1FA1DC620051FB21 /* AppDelegate.swift in Sources */,
+				52A337FE2430D3CD004D2806 /* TickCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

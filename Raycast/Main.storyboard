@@ -69,10 +69,22 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cMf-4R-O0C">
+                                <rect key="frame" x="20" y="528" width="374" height="2"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="2" id="XS3-wB-fts"/>
+                                </constraints>
+                                <color key="progressTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="trackTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </progressView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="kAP-HO-2xv" secondAttribute="trailing" constant="16" id="4Fm-vK-FWg"/>
+                            <constraint firstItem="cMf-4R-O0C" firstAttribute="top" secondItem="7hf-cm-pTI" secondAttribute="bottom" constant="28" id="5ZB-eC-d71"/>
+                            <constraint firstItem="cMf-4R-O0C" firstAttribute="width" secondItem="Qvq-Ie-XmM" secondAttribute="width" id="6Ie-mu-608"/>
+                            <constraint firstItem="cMf-4R-O0C" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="EnX-ok-nMn"/>
                             <constraint firstItem="7hf-cm-pTI" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="J3G-4H-nOi"/>
                             <constraint firstItem="7hf-cm-pTI" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="KC1-M1-yHi"/>
                             <constraint firstItem="Qvq-Ie-XmM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Oz5-b3-kMr"/>
@@ -93,6 +105,7 @@
                     <connections>
                         <outlet property="countDownLabel" destination="kAP-HO-2xv" id="3ju-1C-TGZ"/>
                         <outlet property="countUpLabel" destination="Sfo-Dq-TNe" id="snV-1n-BhI"/>
+                        <outlet property="fatProgressBar" destination="cMf-4R-O0C" id="u4H-rU-BJX"/>
                         <outlet property="meterView" destination="bFC-tN-D1c" id="Tt3-3R-leh"/>
                         <outlet property="playPauseButton" destination="7hf-cm-pTI" id="XpV-bT-bDK"/>
                         <outlet property="progressBar" destination="Qvq-Ie-XmM" id="SWa-9B-J7h"/>
