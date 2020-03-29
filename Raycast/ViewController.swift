@@ -80,7 +80,6 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 		
-		addCollection()
 		
 //		апдейт лейблов
     countUpLabel.text = formatted(time: 0)
@@ -92,6 +91,9 @@ class ViewController: UIViewController {
 		updater = CADisplayLink(target: self, selector: #selector(updateUI))
 		updater?.add(to: .current, forMode: .defaultRunLoopMode)
 		updater?.isPaused = true
+		
+		
+		addCollection()
   }
 	
 	
@@ -100,12 +102,17 @@ class ViewController: UIViewController {
 		
 		//сделано  только для айфона 8+
 		
+		let width: CGFloat = 376
+		
 		let customFramme = CGRect(x: 20,
 															y: 495,
-															width: 376,
+															width: width,
 															height: 20)
 		
-		let CV = CollectionTiks(frame: customFramme)
+		let max: Int = Int(width / tickWidth) - 1
+		let arrayData: [CGFloat] = (0...max).map({_ in CGFloat.random(in: 0...1)})
+		
+		let CV = CollectionTiks(frame: customFramme, dataArray: arrayData)
 		
 		self.view.addSubview(CV)
 	}
@@ -155,8 +162,8 @@ extension ViewController {
 		let time = Float(currentPosition) / audioSampleRate
 		
 //		формат лейблов
-//		countUpLabel.text = formatted(time: time)
-//		countDownLabel.text = formatted(time: audioLengthSeconds - time)
+		countUpLabel.text = formatted(time: time)
+		countDownLabel.text = formatted(time: audioLengthSeconds - time)
 
 		// если аудио файл проигран до конца
 		if currentPosition >= audioLengthSamples {
@@ -205,6 +212,10 @@ extension ViewController {
 		}
 		
   }
+	
+	
+	
+	
 
   func connectVolumeTap() {
 		// Получить формат данных для mainMixerNodeвывода.

@@ -13,7 +13,7 @@ class TickCell: UICollectionViewCell {
 	@IBOutlet weak var leftView: UIView!
 	
 	@IBOutlet weak var constreint: NSLayoutConstraint!
-	var procent: CGFloat = 2 {
+	var procent: CGFloat = 0 { //от 0 до 1
 		didSet{
 			addHold()
 		}
@@ -23,7 +23,7 @@ class TickCell: UICollectionViewCell {
 	private func addHold(){
 		self.backgroundColor = UIColor.clear
 		
-		constreint.constant = self.frame.height * procent / 100
+		constreint.constant = self.frame.height * procent
 		leftView.backgroundColor = UIColor.red
 	}
 	
