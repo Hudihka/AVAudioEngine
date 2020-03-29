@@ -1,29 +1,5 @@
 /// Copyright (c) 2017 Razeware LLC
 ///
-/// Permission is hereby granted, free of charge, to any person obtaining a copy
-/// of this software and associated documentation files (the "Software"), to deal
-/// in the Software without restriction, including without limitation the rights
-/// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-/// copies of the Software, and to permit persons to whom the Software is
-/// furnished to do so, subject to the following conditions:
-///
-/// The above copyright notice and this permission notice shall be included in
-/// all copies or substantial portions of the Software.
-///
-/// Notwithstanding the foregoing, you may not use, copy, modify, merge, publish,
-/// distribute, sublicense, create a derivative work, and/or sell copies of the
-/// Software in any work that is designed, intended, or marketed for pedagogical or
-/// instructional purposes related to programming, coding, application development,
-/// or information technology.  Permission for such use, copying, modification,
-/// merger, publication, distribution, sublicensing, creation of derivative works,
-/// or sale is expressly withheld.
-///
-/// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-/// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-/// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-/// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-/// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-/// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
 import UIKit
@@ -33,14 +9,10 @@ class ViewController: UIViewController {
 
   // MARK: Outlets
   @IBOutlet weak var playPauseButton: UIButton!
-  @IBOutlet weak var skipForwardButton: UIButton!
-  @IBOutlet weak var skipBackwardButton: UIButton!
   @IBOutlet weak var progressBar: UIProgressView!
   @IBOutlet weak var meterView: UIView!
   @IBOutlet weak var volumeMeterHeight: NSLayoutConstraint!
-  @IBOutlet weak var rateSlider: UISlider!
   @IBOutlet weak var rateLabel: UILabel!
-  @IBOutlet weak var rateLabelLeading: NSLayoutConstraint!
   @IBOutlet weak var countUpLabel: UILabel!
   @IBOutlet weak var countDownLabel: UILabel!
 
@@ -79,7 +51,6 @@ class ViewController: UIViewController {
   var rateValue: Float = 1.0 {
     didSet {
       rateEffect.rate = rateValue
-      updateRateLabel()
     }
   }
   var updater: CADisplayLink?
@@ -112,7 +83,6 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    setupRateSlider()
     countUpLabel.text = formatted(time: 0)
     countDownLabel.text = formatted(time: audioLengthSeconds)
 		
@@ -124,11 +94,7 @@ class ViewController: UIViewController {
 		updater?.isPaused = true
   }
 
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
 
-    updateRateLabel()
-  }
 }
 
 // MARK: - Actions
@@ -136,7 +102,6 @@ class ViewController: UIViewController {
 extension ViewController {
   @IBAction func didChangeRateValue(_ sender: UISlider) {
     let index = round(sender.value)
-    rateSlider.setValue(Float(index), animated: false)
     rateValue = rateSliderValues[Int(index)]
   }
 
@@ -194,7 +159,7 @@ extension ViewController {
 			player.stop()
 			updater?.isPaused = true
 			playPauseButton.isSelected = false
-			disconnectVolumeTap() //disconnectVolumeTap
+			disconnectVolumeTap()
 		}
 
 		
@@ -204,23 +169,7 @@ extension ViewController {
 // MARK: - Display related
 //
 extension ViewController {
-  func setupRateSlider() {
-    let numSteps = rateSliderValues.count-1
-    rateSlider.minimumValue = 0
-    rateSlider.maximumValue = Float(numSteps)
-    rateSlider.isContinuous = true
-    rateSlider.setValue(1.0, animated: false)
-    rateValue = 1.0
-    updateRateLabel()
-  }
 
-  func updateRateLabel() {
-    rateLabel.text = "\(rateValue)x"
-    let trackRect = rateSlider.trackRect(forBounds: rateSlider.bounds)
-    let thumbRect = rateSlider.thumbRect(forBounds: rateSlider.bounds , trackRect: trackRect, value: rateSlider.value)
-    let x = thumbRect.origin.x + thumbRect.width/2 - rateLabel.frame.width/2
-    rateLabelLeading.constant = x
-  }
 
   func formatted(time: Float) -> String {
     var secs = Int(ceil(time))
