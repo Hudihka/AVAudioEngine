@@ -185,7 +185,7 @@ extension ViewController {
   func setupAudio() {
 		
 		// 1
-		audioFileURL = Bundle.main.url(forResource: "Intro", withExtension: "mp4")
+		audioFileURL = Bundle.main.url(forResource: "Тони Раут & Иван Рейс - Шот", withExtension: "mp3")
 
 		// 2
 		engine.attach(player)
@@ -214,7 +214,7 @@ extension ViewController {
   }
 	
 	
-	
+	//MARK: - МОЩНОСТЬ АУДИО СЭМПЛА
 	
 
   func connectVolumeTap() {
@@ -261,8 +261,6 @@ extension ViewController {
 		
   }
 	
-	
-	//MARK: - МОЩНОСТЬ АУДИО СЭМПЛА
 	/*
 	преобразует отрицательное powerзначение в децибелах
 	в положительное значение, которое корректирует
