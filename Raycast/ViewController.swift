@@ -12,7 +12,6 @@ class ViewController: UIViewController {
   @IBOutlet weak var progressBar: UIProgressView!
   @IBOutlet weak var meterView: UIView!
   @IBOutlet weak var volumeMeterHeight: NSLayoutConstraint!
-  @IBOutlet weak var rateLabel: UILabel!
   @IBOutlet weak var countUpLabel: UILabel!
   @IBOutlet weak var countDownLabel: UILabel!
 
@@ -20,7 +19,6 @@ class ViewController: UIViewController {
   var engine = AVAudioEngine()
 	
   var player = AVAudioPlayerNode()
-  var rateEffect = AVAudioUnitTimePitch()
 
   var audioFile: AVAudioFile? {
     didSet {
@@ -32,6 +30,7 @@ class ViewController: UIViewController {
       }
     }
   }
+	
   var audioFileURL: URL? {
     didSet {
       if let audioFileURL = audioFileURL {
@@ -43,23 +42,20 @@ class ViewController: UIViewController {
 
   // MARK: other properties
   var audioFormat: AVAudioFormat?
-  var audioSampleRate: Float = 0
-  var audioLengthSeconds: Float = 0
-  var audioLengthSamples: AVAudioFramePosition = 0
+  var audioSampleRate: Float = 0 //количество сейплов в секунде
+  var audioLengthSeconds: Float = 0 //количество секунд
+  var audioLengthSamples: AVAudioFramePosition = 0 //количество аудио сейплов в файле
   var needsFileScheduled = true
-  let rateSliderValues: [Float] = [0.5, 1.0, 1.25, 1.5, 1.75, 2.0, 2.5, 3.0]
-  var rateValue: Float = 1.0 {
-    didSet {
-      rateEffect.rate = rateValue
-    }
-  }
+
   var updater: CADisplayLink?
+	
+	//текущее время воспроизведения
+	
   var currentFrame: AVAudioFramePosition {
 		 // 1
 		guard let lastRenderTime = player.lastRenderTime,
-					let playerTime = player.playerTime (forNodeTime: lastRenderTime)
-			
-			 else {
+					let playerTime = player.playerTime(forNodeTime: lastRenderTime) else {
+						
 				 return  0
 		}
 		
@@ -70,8 +66,7 @@ class ViewController: UIViewController {
 	
   var skipFrame: AVAudioFramePosition = 0
   var currentPosition: AVAudioFramePosition = 0
-  let pauseImageHeight: Float = 26.0
-  let minDb: Float = -80.0
+
 
   enum TimeConstant {
     static let secsPerMin = 60
@@ -82,7 +77,8 @@ class ViewController: UIViewController {
   //
   override func viewDidLoad() {
     super.viewDidLoad()
-
+		
+//		апдейт лейблов
     countUpLabel.text = formatted(time: 0)
     countDownLabel.text = formatted(time: audioLengthSeconds)
 		
@@ -100,10 +96,6 @@ class ViewController: UIViewController {
 // MARK: - Actions
 //
 extension ViewController {
-  @IBAction func didChangeRateValue(_ sender: UISlider) {
-    let index = round(sender.value)
-    rateValue = rateSliderValues[Int(index)]
-  }
 
   @IBAction func playTapped(_ sender: UIButton) {
 		
@@ -111,7 +103,6 @@ extension ViewController {
 
 		// 2
 		if player.isPlaying {
-			disconnectVolumeTap()
 			updater?.isPaused = true
 			player.pause ()
 		} else {
@@ -126,21 +117,11 @@ extension ViewController {
 		}
 		
   }
-
-  @IBAction func plus10Tapped(_ sender: UIButton) {
-    guard let _ = player.engine else { return }
-    seek(to: 10.0)
-  }
-
-  @IBAction func minus10Tapped(_ sender: UIButton) {
-    guard let _ = player.engine else { return }
-    needsFileScheduled = false
-    seek(to: -10.0)
-  }
+	
 
   @objc func updateUI() {
 		
-		/*Свойство skipFrameпредставляет собой смещение,
+		/*Свойство skipFrame представляет собой смещение,
 		добавленное или вычтенное из currentFrameпервоначально установленного на ноль.
 		Убедитесь, что currentPositionне выходит за пределы диапазона файла.*/
 
@@ -151,49 +132,23 @@ extension ViewController {
 		// прогресс бар
 		progressBar.progress = Float(currentPosition) / Float(audioLengthSamples)
 		let time = Float(currentPosition) / audioSampleRate
-		countUpLabel.text = formatted(time: time)
-		countDownLabel.text = formatted(time: audioLengthSeconds - time)
+		
+//		формат лейблов
+//		countUpLabel.text = formatted(time: time)
+//		countDownLabel.text = formatted(time: audioLengthSeconds - time)
 
 		// если аудио файл проигран до конца
 		if currentPosition >= audioLengthSamples {
 			player.stop()
 			updater?.isPaused = true
 			playPauseButton.isSelected = false
-			disconnectVolumeTap()
 		}
 
 		
   }
 }
 
-// MARK: - Display related
-//
-extension ViewController {
 
-
-  func formatted(time: Float) -> String {
-    var secs = Int(ceil(time))
-    var hours = 0
-    var mins = 0
-
-    if secs > TimeConstant.secsPerHour {
-      hours = secs / TimeConstant.secsPerHour
-      secs -= hours * TimeConstant.secsPerHour
-    }
-
-    if secs > TimeConstant.secsPerMin {
-      mins = secs / TimeConstant.secsPerMin
-      secs -= mins * TimeConstant.secsPerMin
-    }
-
-    var formattedString = ""
-    if hours > 0 {
-      formattedString = "\(String(format: "%02d", hours)):"
-    }
-    formattedString += "\(String(format: "%02d", mins)):\(String(format: "%02d", secs))"
-    return formattedString
-  }
-}
 
 // MARK: - Audio
 //
@@ -234,7 +189,6 @@ extension ViewController {
 		// Получить формат данных для mainMixerNodeвывода.
 		let format = engine.mainMixerNode.outputFormat(forBus: 0)
 		
-		
 		// buffer.frameLength фактический размер буффера
 		// when время захвата буфера
 		engine.mainMixerNode.installTap(onBus: 0, bufferSize: 1024, format: format) { buffer, when in
@@ -266,10 +220,10 @@ extension ViewController {
 			DispatchQueue.main.async {
 				
 //				получаем миниимальное значение и выставляем его
-//				где self.pauseImageHeight = 26 это 100% высота
+//				где  100% высота это 26
 				
 				self.volumeMeterHeight.constant = !updater.isPaused ?
-							 CGFloat(min((meterLevel * self.pauseImageHeight), self.pauseImageHeight)) : 0.0
+							 CGFloat(min((meterLevel * 26), 26)) : 0.0
 			}
 		}
 		
@@ -285,6 +239,8 @@ extension ViewController {
 	func scaledPower(power: Float) -> Float {
 		// это конечное значение
 		guard power.isFinite else { return 0.0 }
+		
+		let minDb: Float = -80.0
 
 		// 2
 		if power < minDb {
@@ -297,10 +253,5 @@ extension ViewController {
 		}
 	}
 
-  func disconnectVolumeTap() {
-  }
-
-  func seek(to time: Float) {
-  }
 
 }
