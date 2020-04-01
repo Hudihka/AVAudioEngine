@@ -15,6 +15,9 @@
 		52620C2F243508E900BDC120 /* TestViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52620C2E243508E900BDC120 /* TestViewController2.swift */; };
 		52620C3224350A4600BDC120 /* AudioContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52620C3124350A4600BDC120 /* AudioContext.swift */; };
 		52620C3424350A5300BDC120 /* test.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 52620C3324350A5300BDC120 /* test.mp3 */; };
+		52620C362435153100BDC120 /* test2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 52620C352435153100BDC120 /* test2.mp3 */; };
+		52620C392435169C00BDC120 /* CellTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52620C372435169C00BDC120 /* CellTest.swift */; };
+		52620C3A2435169C00BDC120 /* CellTest.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52620C382435169C00BDC120 /* CellTest.xib */; };
 		52A337F62430D10F004D2806 /* ExtensionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A337F52430D10F004D2806 /* ExtensionVC.swift */; };
 		52A337FC2430D3CD004D2806 /* CollectionTiks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A337F92430D3CD004D2806 /* CollectionTiks.swift */; };
 		52A337FD2430D3CD004D2806 /* TickCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52A337FA2430D3CD004D2806 /* TickCell.xib */; };
@@ -36,6 +39,9 @@
 		52620C2E243508E900BDC120 /* TestViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController2.swift; sourceTree = "<group>"; };
 		52620C3124350A4600BDC120 /* AudioContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioContext.swift; sourceTree = "<group>"; };
 		52620C3324350A5300BDC120 /* test.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = test.mp3; sourceTree = "<group>"; };
+		52620C352435153100BDC120 /* test2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = test2.mp3; sourceTree = "<group>"; };
+		52620C372435169C00BDC120 /* CellTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellTest.swift; sourceTree = "<group>"; };
+		52620C382435169C00BDC120 /* CellTest.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellTest.xib; sourceTree = "<group>"; };
 		52A337F52430D10F004D2806 /* ExtensionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionVC.swift; sourceTree = "<group>"; };
 		52A337F92430D3CD004D2806 /* CollectionTiks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionTiks.swift; sourceTree = "<group>"; };
 		52A337FA2430D3CD004D2806 /* TickCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TickCell.xib; sourceTree = "<group>"; };
@@ -83,6 +89,7 @@
 				3F600C741FA1DC620051FB21 /* LaunchScreen.storyboard */,
 				3FC245601FB7114A0042D145 /* Main.storyboard */,
 				52620C3324350A5300BDC120 /* test.mp3 */,
+				52620C352435153100BDC120 /* test2.mp3 */,
 				52620C302435090200BDC120 /* TestViewController2 */,
 				52620C2C2435082D00BDC120 /* VC */,
 				52620C2D2435086200BDC120 /* VCTest */,
@@ -113,6 +120,8 @@
 			isa = PBXGroup;
 			children = (
 				52620C2E243508E900BDC120 /* TestViewController2.swift */,
+				52620C372435169C00BDC120 /* CellTest.swift */,
+				52620C382435169C00BDC120 /* CellTest.xib */,
 				52620C3124350A4600BDC120 /* AudioContext.swift */,
 			);
 			path = TestViewController2;
@@ -193,7 +202,9 @@
 				52620C3424350A5300BDC120 /* test.mp3 in Resources */,
 				01D817C91FD49E6F00C0F342 /* Assets.xcassets in Resources */,
 				3F600C761FA1DC620051FB21 /* LaunchScreen.storyboard in Resources */,
+				52620C3A2435169C00BDC120 /* CellTest.xib in Resources */,
 				52A337FD2430D3CD004D2806 /* TickCell.xib in Resources */,
+				52620C362435153100BDC120 /* test2.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,6 +215,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52620C392435169C00BDC120 /* CellTest.swift in Sources */,
 				52620C3224350A4600BDC120 /* AudioContext.swift in Sources */,
 				3F600C6E1FA1DC620051FB21 /* ViewController.swift in Sources */,
 				52A337F62430D10F004D2806 /* ExtensionVC.swift in Sources */,
