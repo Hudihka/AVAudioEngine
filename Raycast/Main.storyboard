@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="X9F-PJ-DDE">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,24 +13,24 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Raycast" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Raycast-image" translatesAutoresizingMaskIntoConstraints="NO" id="lmV-XS-5Np">
-                                <rect key="frame" x="16" y="44" width="382" height="382"/>
+                                <rect key="frame" x="16" y="0.0" width="343" height="343"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="lmV-XS-5Np" secondAttribute="height" multiplier="1:1" id="TgX-Wo-4R7"/>
                                 </constraints>
                             </imageView>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Qvq-Ie-XmM">
-                                <rect key="frame" x="20" y="434" width="374" height="2"/>
+                                <rect key="frame" x="16" y="351" width="343" height="2"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="2" id="BA7-OY-UfY"/>
                                 </constraints>
                                 <color key="progressTintColor" red="0.067173667252063751" green="0.19737473130226135" blue="0.11370640248060226" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </progressView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bFC-tN-D1c">
-                                <rect key="frame" x="202" y="491" width="10" height="0.0"/>
+                                <rect key="frame" x="182.5" y="408" width="10" height="0.0"/>
                                 <color key="backgroundColor" red="0.31367146968841553" green="0.69053041934967041" blue="0.40384763479232788" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="10" id="BX8-zM-rUn"/>
@@ -38,7 +38,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7hf-cm-pTI">
-                                <rect key="frame" x="185" y="456" width="44" height="44"/>
+                                <rect key="frame" x="165.5" y="373" width="44" height="44"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="UOM-ie-oga"/>
@@ -52,7 +52,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sfo-Dq-TNe">
-                                <rect key="frame" x="16" y="444" width="28.5" height="21"/>
+                                <rect key="frame" x="16" y="361" width="28.5" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="7lG-ho-heM"/>
                                 </constraints>
@@ -61,7 +61,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kAP-HO-2xv">
-                                <rect key="frame" x="369.5" y="444" width="28.5" height="21"/>
+                                <rect key="frame" x="330.5" y="361" width="28.5" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="EPM-29-UBM"/>
                                 </constraints>
@@ -70,7 +70,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cMf-4R-O0C">
-                                <rect key="frame" x="20" y="528" width="374" height="2"/>
+                                <rect key="frame" x="16" y="445" width="343" height="2"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="2" id="XS3-wB-fts"/>
@@ -115,6 +115,35 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-202.40000000000001" y="79.610194902548727"/>
+        </scene>
+        <!--Test View Controller-->
+        <scene sceneID="0Qm-zR-Ygb">
+            <objects>
+                <viewController id="X9F-PJ-DDE" customClass="TestViewController" customModule="Raycast" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Qzt-FM-aZH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0VF-FO-AGC">
+                                <rect key="frame" x="67.5" y="269.5" width="240" height="128"/>
+                                <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="cBU-LX-1eS"/>
+                                    <constraint firstAttribute="width" constant="240" id="zns-dw-NTI"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="0VF-FO-AGC" firstAttribute="centerX" secondItem="CNA-3X-Ys9" secondAttribute="centerX" id="6XF-0F-cu9"/>
+                            <constraint firstItem="0VF-FO-AGC" firstAttribute="centerY" secondItem="CNA-3X-Ys9" secondAttribute="centerY" id="R9J-hl-nfV"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="CNA-3X-Ys9"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YDY-L2-Zgt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="584" y="79"/>
         </scene>
     </scenes>
     <resources>

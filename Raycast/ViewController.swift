@@ -223,65 +223,84 @@ extension ViewController {
 		
 		// buffer.frameLength фактический размер буффера
 		// when время захвата буфера
-		engine.mainMixerNode.installTap(onBus: 0, bufferSize: 1024, format: format) { buffer, when in
-			// 3
-			guard
-				let channelData = buffer.floatChannelData, //buffer.floatChannelData массив указателей на данные каждого образца
-				let updater = self.updater
-				else {
-					return
-			}
+		engine.mainMixerNode.installTap(onBus: 0, bufferSize: 1024, format: format) { buffer, _ in
 
-			let channelDataValue = channelData.pointee
-			// переделываем ма массив данных в массив флоат
-			//получаем массив флоатов от 0 до длинны буфера(не включая его) с шагом buffer.stride
-			let channelDataValueArray = stride(from: 0,
-																				 to: Int(buffer.frameLength), //buffer.stride Количество буферных чередующихся каналов.
-																				 by: buffer.stride).map{ channelDataValue[$0] }
-			//возводим каждое значение в квадрат
-			//складывапем их, делим на длинну буфера
-			//и извлекаем квадратный корень
-			let all = channelDataValueArray.map{ $0 * $0 }.reduce(0, +) / Float(buffer.frameLength)
-			
-			//Преобразовать среднеквадратичное значение в децибелы ( ссылка на акустический децибел ) Это должно быть значение от -160 до 0
-			
-			let avgPower = 20 * log10(sqrt(all))
-			// преобразуем значение от 0 до 1
-			let meterLevel = self.scaledPower(power: avgPower)
-
-			DispatchQueue.main.async {
-				
-//				получаем миниимальное значение и выставляем его
-//				где  100% высота это 26
-				
-				self.volumeMeterHeight.constant = !updater.isPaused ?
-							 CGFloat(min((meterLevel * 26), 26)) : 0.0
-			}
+      
+      
+      
 		}
 		
   }
-	
-	/*
-	преобразует отрицательное powerзначение в децибелах
-	в положительное значение, которое корректирует
-	volumeMeterHeight.constantзначение выше
-	*/
-	func scaledPower(power: Float) -> Float {
-		// это конечное значение
-		guard power.isFinite else { return 0.0 }
-		
-		let minDb: Float = -80.0
+  
+  
+  private func valueBuffer(buffer: AVAudioNodeTapBlock, value100Procent: Float) -> Float{
+    
+          guard let channelData = buffer.floatChannelData, //buffer.floatChannelData массив указателей на данные каждого образца
+            let updater = self.updater else {
+              return 0
+          }
 
-		// 2
-		if power < minDb {
-			return 0.0
-		} else if power >= 1.0 {
-			return 1.0
-		} else {
-			//  значение между 0,0 и 1,0.
-			return (fabs(minDb) - fabs(power)) / fabs(minDb)
-		}
-	}
+          let channelDataValue = channelData.pointee
+          // переделываем ма массив данных в массив флоат
+          //получаем массив флоатов от 0 до длинны буфера(не включая его) с шагом buffer.stride
+          let channelDataValueArray = stride(from: 0,
+                                             to: Int(buffer.frameLength), //buffer.stride Количество буферных чередующихся каналов.
+                                             by: buffer.stride).map{ channelDataValue[$0] }
+    
+          //возводим каждое значение в квадрат
+          //складывапем их, делим на длинну буфера
+          //и извлекаем квадратный корень
+          let all = channelDataValueArray.map{ $0 * $0 }.reduce(0, +) / Float(buffer.frameLength)
+          
+          //Преобразовать среднеквадратичное значение в децибелы ( ссылка на акустический децибел ) Это должно быть значение от -160 до 0
+          
+          let avgPower = 20 * log10(sqrt(all))
+          // преобразуем значение от 0 до 1
+          let meterLevel = self.scaledPower(power: avgPower)
+
+          DispatchQueue.main.async {
+            
+            return min((meterLevel * value100Procent), value100Procent)
+            
+          }
+    
+    
+    
+  }
+  
+  
+  
 
 
+
+}
+
+
+extension Float{
+  
+  /*
+  преобразует отрицательное powerзначение в децибелах
+  в положительное значение, которое корректирует
+  volumeMeterHeight.constantзначение выше
+  */
+  var scaledPower: Float {
+    // это конечное значение
+    guard self.isFinite else { return 0.0 }
+    
+    let minDb: Float = -80.0
+
+    // 2
+    if self < minDb {
+      return 0.0
+    } else if self >= 1.0 {
+      return 1.0
+    } else {
+      //  значение между 0,0 и 1,0.
+      return (fabs(minDb) - fabs(self)) / fabs(minDb)
+    }
+  }
+  
+  
+  
+  
 }
