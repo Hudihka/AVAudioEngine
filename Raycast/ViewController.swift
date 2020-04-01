@@ -223,54 +223,48 @@ extension ViewController {
 		
 		// buffer.frameLength фактический размер буффера
 		// when время захвата буфера
-		engine.mainMixerNode.installTap(onBus: 0, bufferSize: 1024, format: format) { buffer, _ in
+		engine.mainMixerNode.installTap(onBus: 0, bufferSize: 1024, format: format) {[weak self] buffer, _ in
 
-      
-      
+      self?.valueBuffer(buffer: buffer, value100Procent: 26, completion: { (float) in
+        self?.volumeMeterHeight.constant = float
+      })
       
 		}
 		
   }
   
   
-  private func valueBuffer(buffer: AVAudioNodeTapBlock, value100Procent: Float) -> Float{
+  private func valueBuffer(buffer: AVAudioPCMBuffer, value100Procent: Float, completion:@escaping((CGFloat) -> Void)){
     
-          guard let channelData = buffer.floatChannelData, //buffer.floatChannelData массив указателей на данные каждого образца
-            let updater = self.updater else {
-              return 0
-          }
-
-          let channelDataValue = channelData.pointee
-          // переделываем ма массив данных в массив флоат
-          //получаем массив флоатов от 0 до длинны буфера(не включая его) с шагом buffer.stride
-          let channelDataValueArray = stride(from: 0,
-                                             to: Int(buffer.frameLength), //buffer.stride Количество буферных чередующихся каналов.
-                                             by: buffer.stride).map{ channelDataValue[$0] }
+    guard let channelData = buffer.floatChannelData else { //buffer.floatChannelData массив указателей на данные каждого образца
+        completion(0)
+      return
+    }
     
-          //возводим каждое значение в квадрат
-          //складывапем их, делим на длинну буфера
-          //и извлекаем квадратный корень
-          let all = channelDataValueArray.map{ $0 * $0 }.reduce(0, +) / Float(buffer.frameLength)
-          
-          //Преобразовать среднеквадратичное значение в децибелы ( ссылка на акустический децибел ) Это должно быть значение от -160 до 0
-          
-          let avgPower = 20 * log10(sqrt(all))
-          // преобразуем значение от 0 до 1
-          let meterLevel = self.scaledPower(power: avgPower)
-
-          DispatchQueue.main.async {
-            
-            return min((meterLevel * value100Procent), value100Procent)
-            
-          }
+    let channelDataValue = channelData.pointee
+    // переделываем ма массив данных в массив флоат
+    //получаем массив флоатов от 0 до длинны буфера(не включая его) с шагом buffer.stride
+    let channelDataValueArray = stride(from: 0,
+                                       to: Int(buffer.frameLength), //buffer.stride Количество буферных чередующихся каналов.
+      by: buffer.stride).map{ channelDataValue[$0] }
     
+    //возводим каждое значение в квадрат
+    //складывапем их, делим на длинну буфера
+    //и извлекаем квадратный корень
+    let all = channelDataValueArray.map{ $0 * $0 }.reduce(0, +) / Float(buffer.frameLength)
     
+    //Преобразовать среднеквадратичное значение в децибелы ( ссылка на акустический децибел ) Это должно быть значение от -160 до 0
+    
+    let avgPower = 20 * log10(sqrt(all))
+    // преобразуем значение от 0 до 1
+    let meterLevel = avgPower.scaledPower
+    let returnValue = min((meterLevel * value100Procent), value100Procent)
+    
+    DispatchQueue.main.async {
+      completion(CGFloat(returnValue))
+    }
     
   }
-  
-  
-  
-
 
 
 }
