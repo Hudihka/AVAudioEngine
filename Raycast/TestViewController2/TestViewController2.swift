@@ -35,7 +35,10 @@ class TestViewController2: UIViewController {
 			outputArray = outputArray.map({20 * log10(abs($0))})
 			
 			self.dataArray = outputArray.reloadProcent
-			self.tableView.reloadData()
+			
+			DispatchQueue.main.async {
+				self.tableView.reloadData()
+			}
 			
 			
 		})
@@ -69,7 +72,9 @@ extension TestViewController2: UITableViewDelegate, UITableViewDataSource{
 	}
 	
 	
-	
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		return 5
+	}
 	
 	
 	
@@ -80,7 +85,7 @@ extension Array where Element == Float {
 	var reloadProcent: [Float]{
 		
 		if let max = self.max(by: {$0 < $1}) {
-			return self.map({$0 * max})
+			return self.map({$0 / max})
 		}
 		
 		return []
